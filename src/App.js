@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import CountUp from './Components/CountUp/CountUp';
+import Employee from './Components/Employee/Employee';
+import React from 'react';
+import ModifiedComponent from './Components/Event/MouseEnter';
+import LifeCycle from './Components/Lifecycle/LifeCycle';
+import Nav from './Components/Navigation/Nav';
+// import MouseEnter from './Components/Event/MouseEnter';
 
+// ---> Without JSX
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  return React.createElement('div', null,
+    // React.createElement(MouseEnter,null),
+    React.createElement(Nav,null),
+    // React.createElement(ModifiedComponent,null),
+    // React.createElement(CountUp,null),
+    React.createElement(Employee, null),
   );
 }
+
+// ----> With JSX
+// (
+//   <div>
+//      <Employee></Employee>
+//   </div>
+// )
 
 export default App;
