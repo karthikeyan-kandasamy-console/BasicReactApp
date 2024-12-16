@@ -1,55 +1,62 @@
 import React, { Component } from 'react'
+import ChildLifecycle from './ChildLifecycle';
 
 export class LifeCycle extends Component {
 
     constructor(props) {
         super(props)
+        console.log("Parent Constructor Execution");
 
-        console.log("Constructor Execution");
+        this.state = {
+            condition:true,
+            count:0
+        }
 
     }
 
-    static getDerivedStateFromProps(nextProps, nextState) {
-
-        console.log("Render Execution");
-
-        // if (nextProps.value !== nextState.value) {
-        //     return { value: nextProps.value };
-        // }
-        // return null;
+    toggleChild(){
+        this.setState({
+            condition:!this.state.condition,
+        })
+    }
+    increment(){
+        this.setState({
+            count:this.state.count+1
+        })
     }
 
 
     render() {
-        console.log("Render Execution");
+        console.log("Parent render Execution");
+
         return (
-            <div>Mounting</div>
+            <div >
+                <h1>Parent Lifecycle Component</h1>
+
+                <h1>{this.state.count}</h1>
+
+
+                <button onClick={()=>this.increment()}>Increment</button>
+
+                <br />
+
+                <button onClick={()=>this.toggleChild()}>Render Child</button>
+
+                {this.state.condition?<ChildLifecycle count={this.state.count} ></ChildLifecycle>:null}
+            </div>
         )
     }
 
-    componentDidMount() {
-        console.log('Component componentDidMount!');
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('Component shouldComponentUpdate');
-        return nextState.count !== this.state.count;
-    }
-
-    getSnapshotBeforeUpdate(prevProps, prevState) {
-        // You can return values that will be passed to componentDidUpdate()
-        console.log('Component getSnapshotBeforeUpdate');
-        return null;
-    }
 
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('Component updated!');
-    }
+    
 
-    componentWillUnmount() {
-        console.log('Component will unmount!');
-    }
+    
+
+
+    
+
+    
 
 }
 
